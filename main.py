@@ -46,7 +46,9 @@
         Подсказка: Используйте цикл while и запрос на ввод "Хотите сыграть снова? (да/нет)".
 """
 
+
 HANGMANPICS = [
+
     """
   +---+
   |   |
@@ -104,6 +106,8 @@ HANGMANPICS = [
       |
 =========""",
 ]
+
+import random
 
 COMMON_NOUNS = [
     "время",
@@ -201,4 +205,36 @@ COMMON_NOUNS = [
     "группа",
     "участие",
 ]
+
+answer = list(random.choice(COMMON_NOUNS))
+print(''.join(answer))
+
+step_of_death = HANGMANPICS
+at = 0
+playfield = []
+for i in answer:
+    playfield.append('_')
+
+while True:
+    print("Слово:")
+    print("".join(playfield))
+    x = input("Введите букву:")
+    
+    if len(x) > 1:
+        print("Нужно вводить одну букву")
+        continue
+
+    for i in range(len(answer)):
+        if x == answer[i]:
+            playfield[i] = x
+
+    if x in answer:
+        continue
+    else:
+        print(HANGMANPICS[0])
+        at += 1
+    
+    if at == 7:
+        print('Ты проиграл')
+        break
 
